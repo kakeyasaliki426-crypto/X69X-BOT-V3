@@ -25,19 +25,19 @@
     "ignoreCommand": []
   },
   "adminBot": [
-    "61588403646276",
-    "61585772322631",
-    "61576599896861"
+    "100080077652459",
+    "",
+    ""
   ],
   "developer": [
-    "61588403646276",
+    "100080077652459",
     "61585772322631",
     "61576599896861",
     "61553004827618",
     "100077764623961"
   ],
   "vipuser": [
-    "61588403646276",
+    "100080077652459",
     "61585772322631",
     "61576599896861"
   ],
@@ -47,7 +47,7 @@
     "61576599896861"
   ],
   "creator": [
-    "61585772322631",
+    "100080077652459",
     "61588403646276",
     "61576599896861"
   ],
@@ -79,8 +79,8 @@
     "whiteListIds": [],
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
-  "nickNameBot": "X69X BOT V3",
-  "prefix": ")",
+  "nickNameBot": "Angela bot",
+  "prefix": "!",
   "database": {
     "type": "mongodb",
     "uriMongodb": "mongodb+srv://Hinata:W2fNh.H9iWFU22F@cluster0.cyattib.mongodb.net/OZADNOOB1?retryWrites=true&w=majority&appName=Cluster0",
