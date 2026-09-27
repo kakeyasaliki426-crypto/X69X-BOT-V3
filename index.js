@@ -1,5 +1,6 @@
 const { spawn } = require("child_process");
 const log = require("./logger/log.js");
+const express = require("express");
 
 let restartCount = 0;
 let lastRestartTime = Date.now();
@@ -11,6 +12,24 @@ function getRestartDelay() {
   return Math.round(delay);
 }
 
+// ✅ SERVEUR — GARDE RENDER EN LIGNE
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get("/", (req, res) => {
+  res.send("🤖 ANGELA — En ligne ! Créée par Ariel Aks Otaku ✨");
+});
+
+app.get("/keepalive", (req, res) => {
+  res.send("✅ Toujours active — " + new Date().toLocaleString());
+});
+
+app.listen(PORT, () => {
+  log.info("INDEX", `Serveur de maintien actif sur le port ${PORT}`);
+  log.info("INDEX", "🤖 ANGELA — Prête à fonctionner !");
+});
+
+// 🔄 LANCEMENT DU BOT
 function startProject() {
   const now = Date.now();
   if (now - lastRestartTime > 10 * 60 * 1000) {
@@ -28,20 +47,20 @@ function startProject() {
   child.on("close", (code) => {
     if (code === 2) {
       restartCount = 0;
-      log.info("INDEX", "Restarting bot (requested via restart command)");
+      log.info("INDEX", "🔄 Redémarrage demandé...");
       setTimeout(startProject, 3000);
     } else if (code !== 0) {
       restartCount++;
       const delay = getRestartDelay();
-      log.info("INDEX", `Bot crashed (code ${code}). Restarting in ${delay}ms... (attempt ${restartCount})`);
+      log.info("INDEX", `⚠️ Bot arrêté (code ${code}) — Nouvelle tentative dans ${delay/1000}s...`);
       setTimeout(startProject, delay);
     } else {
-      log.info("INDEX", "Bot shut down normally");
+      log.info("INDEX", "✅ Bot arrêté normalement");
     }
   });
 
   child.on("error", (err) => {
-    log.err("INDEX", "Failed to start azadx69x.js:", err.message);
+    log.err("INDEX", "❌ Erreur démarrage :", err.message);
     restartCount++;
     const delay = getRestartDelay();
     setTimeout(startProject, delay);
